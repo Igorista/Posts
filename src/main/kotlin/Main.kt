@@ -14,9 +14,7 @@ object Wallservice {
     fun add(post: Post): Post {
         posts += post
         val notEmpty = posts.last()
-        for (i in posts.indices) {
-            notEmpty.id = post.id + 1
-        }
+        notEmpty.id = posts.size.toLong()
         return posts.last()
     }
 
@@ -25,7 +23,6 @@ object Wallservice {
         for (i in posts.indices) {
             when {
                 posts[i].id != post.id -> {
-                    postUpdated = false
                 }
                 else -> {
                     posts[i].id = post.id
