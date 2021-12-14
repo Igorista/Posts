@@ -1,10 +1,15 @@
 fun main(args: Array<String>) {
-
-    Wallservice.add(Post(0, 12, 22, 32, 81221))
-    Wallservice.add(Post(0, 11, 65, 232, 91221))
-    Wallservice.update(Post(1, 16, 123, 3435, 101221))
+    Attachments.attachAdd(VideoAttachment("video",21,12,1,12))
+    Attachments.attachAdd(AudioAttachment("audio",1,2,3,4))
+    Attachments.attachAdd(LinkAttachment("link",2,2,2,2))
+    var attach1 = Attachments.attachments
+    Wallservice.add(Post(0, 12, 22, 32, 81221, attach1))
+    Wallservice.add(Post(0, 11, 65, 232, 91221,null))
+    Attachments.attachAdd(LinkAttachment("link",3,3,3,3))
+    attach1 = Attachments.attachments
+    Wallservice.update(Post(1, 16, 123, 3435, 101221,attach1))
     println(Wallservice.posts.joinToString())
-    println(Wallservice.update(post = Post(2,324,234,2345434,34534)))
+
 }
 
 object Wallservice {
@@ -28,6 +33,7 @@ object Wallservice {
                     posts[i].id = post.id
                     posts[i].fromId = post.fromId
                     posts[i].createdBy = post.createdBy
+                    posts[i].attachment = post.attachment
                     postUpdated = true
 
                 }
@@ -35,4 +41,14 @@ object Wallservice {
         }
         return postUpdated
     }
+}
+object Attachments{
+    var attachments: Array<Attachment> = emptyArray()
+    private set
+
+    fun attachAdd (attachment: Attachment): Attachment {
+        attachments += attachment
+        return attachments.last()
+    }
+
 }
