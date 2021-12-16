@@ -8,7 +8,7 @@ class WallServiceTest {
         val result: Boolean
         val service = Wallservice
         val attach = Attachments
-        attach.attachAdd(VideoAttachment("video",1,1,1,1))
+        attach.attachAdd(VideoAttachment("video", Video(1,1,1,1)))
         val videoAdd = attach.attachments
         val add = service.add(Post(0,111,123,12312,123123,videoAdd))
         val(id,_ownerId,_fromId,_createdBy,_date,_attachment) = add
