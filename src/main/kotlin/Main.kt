@@ -1,11 +1,11 @@
 fun main(args: Array<String>) {
-    Attachments.attachAdd(VideoAttachment("video",21,12,1,12))
-    Attachments.attachAdd(AudioAttachment("audio",1,2,3,4))
-    Attachments.attachAdd(LinkAttachment("link",2,2,2,2))
+    Attachments.attachAdd(VideoAttachment("video", Video(21,12,1,12)))
+    Attachments.attachAdd(AudioAttachment("audio",Audio(1,2,3,4)))
+    Attachments.attachAdd(LinkAttachment("link",Link(2,2,2,2)))
     var attach1 = Attachments.attachments
     Wallservice.add(Post(0, 12, 22, 32, 81221, attach1))
     Wallservice.add(Post(0, 11, 65, 232, 91221,null))
-    Attachments.attachAdd(LinkAttachment("link",3,3,3,3))
+    Attachments.attachAdd(LinkAttachment("link",Link(3,3,3,3)))
     attach1 = Attachments.attachments
     Wallservice.update(Post(1, 16, 123, 3435, 101221,attach1))
     println(Wallservice.posts.joinToString())
