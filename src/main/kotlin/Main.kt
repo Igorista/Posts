@@ -1,19 +1,23 @@
 fun main(args: Array<String>) {
-    Attachments.attachAdd(VideoAttachment("video", Video(21,12,1,12)))
-    Attachments.attachAdd(AudioAttachment("audio",Audio(1,2,3,4)))
-    Attachments.attachAdd(LinkAttachment("link",Link(2,2,2,2)))
+    Attachments.attachAdd(VideoAttachment("video", Video(21, 12, 1, 12)))
+    Attachments.attachAdd(AudioAttachment("audio", Audio(1, 2, 3, 4)))
+    Attachments.attachAdd(LinkAttachment("link", Link(2, 2, 2, 2)))
     var attach1 = Attachments.attachments
     Wallservice.add(Post(0, 12, 22, 32, 81221, attach1))
-    Wallservice.add(Post(0, 11, 65, 232, 91221,null))
-    Attachments.attachAdd(LinkAttachment("link",Link(3,3,3,3)))
+    Wallservice.add(Post(0, 11, 65, 232, 91221, null))
+    Attachments.attachAdd(LinkAttachment("link", Link(3, 3, 3, 3)))
     attach1 = Attachments.attachments
-    Wallservice.update(Post(1, 16, 123, 3435, 101221,attach1))
+    Wallservice.update(Post(1, 16, 123, 3435, 101221, attach1))
+    Wallservice.createComment(Comment(1, 12, 161221, "Привет!"))
     println(Wallservice.posts.joinToString())
+    println(Wallservice.comments.joinToString())
 
 }
 
 object Wallservice {
     var posts: Array<Post> = emptyArray()
+        private set
+    var comments = emptyArray<Comment>()
         private set
 
     fun add(post: Post): Post {
@@ -41,12 +45,21 @@ object Wallservice {
         }
         return postUpdated
     }
-}
-object Attachments{
-    var attachments: Array<Attachment> = emptyArray()
-    private set
 
-    fun attachAdd (attachment: Attachment): Attachment {
+    fun createComment(comment: Comment): Comment {
+        for (i in posts.indices){
+            if (posts[i].id != comment.postId) throw PostNotFoundException("Пост под таким номером не существует!")
+            }
+        comments += comment
+        return comments.last()
+    }
+}
+
+object Attachments {
+    var attachments: Array<Attachment> = emptyArray()
+        private set
+
+    fun attachAdd(attachment: Attachment): Attachment {
         attachments += attachment
         return attachments.last()
     }
