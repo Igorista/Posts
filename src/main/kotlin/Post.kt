@@ -1,9 +1,13 @@
 data class Post(
-    var id: Long = 0,
+    var id: Long,
     val ownerId: Int,
     var fromId: Int,
     var createdBy: Int,
     val date: Int,
+    var attachment: Array<Attachment>?,
+//    val postSource: PostSource,
+//    val geo: Geo,
+//    val copyHistory: CopyHistory,
 //    val text: String,
 //    val replyOwnerId: Int,
 //    val replyPostId: Int,
@@ -23,6 +27,4 @@ data class Post(
 //    val repost: Repost,
 //    val views: Views,
 //    val donut: Donut
-) {
-
-}
+) {}
