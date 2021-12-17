@@ -8,7 +8,7 @@ fun main(args: Array<String>) {
     Attachments.attachAdd(LinkAttachment("link", Link(3, 3, 3, 3)))
     attach1 = Attachments.attachments
     Wallservice.update(Post(1, 16, 123, 3435, 101221, attach1))
-    Wallservice.createComment(Comment(1, 12, 161221, "Привет!"))
+    Wallservice.createComment(Comment(55, 12, 161221, "Привет!"))
     println(Wallservice.posts.joinToString())
     println(Wallservice.comments.joinToString())
 
@@ -46,12 +46,13 @@ object Wallservice {
         return postUpdated
     }
 
-    fun createComment(comment: Comment): Comment {
+    fun createComment(comment: Comment) {
         for (i in posts.indices){
-            if (posts[i].id != comment.postId) throw PostNotFoundException("Пост под таким номером не существует!")
+            when {
+                posts[i].id == comment.postId -> comments += comment
+                }
             }
-        comments += comment
-        return comments.last()
+        if(comments.isEmpty()) throw PostNotFoundException("Пост с id ${comment.postId} не существует!")
     }
 }
 

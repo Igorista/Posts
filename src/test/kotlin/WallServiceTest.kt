@@ -38,4 +38,25 @@ class WallServiceTest {
         val result = service.update(update)
         assertFalse(result)
     }
+    @Test
+    fun createCommentTrue(){
+        val service = Wallservice
+        val result: Boolean
+        service.add(Post(0, 111, 123, 12312, 123123,null))
+        service.add(Post(0, 1, 112, 558, 88888,null))
+        service.createComment(Comment(1, 12, 161221, "Привет!"))
+        when {
+            service.comments.isEmpty() -> result = false
+            else -> result = true
+        }
+        assertTrue(result)
+    }
+    @Test(expected = PostNotFoundException::class)
+    fun shouldThrow() {
+        val service = Wallservice
+        service.add(Post(0, 111, 123, 12312, 123123,null))
+        service.add(Post(0, 1, 112, 558, 88888,null))
+        service.createComment(Comment(10, 12, 161221, "Привет!"))
+        service.comments.isEmpty()
+    }
 }
