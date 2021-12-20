@@ -3,6 +3,7 @@ fun main(args: Array<String>) {
     Attachments.attachAdd(AudioAttachment("audio", Audio(1, 2, 3, 4)))
     Attachments.attachAdd(LinkAttachment("link", Link(2, 2, 2, 2)))
     var attach1 = Attachments.attachments
+
     Wallservice.add(Post(0, 12, 22, 32, 81221, attach1))
     Wallservice.add(Post(0, 11, 65, 232, 91221, null))
     Attachments.attachAdd(LinkAttachment("link", Link(3, 3, 3, 3)))
@@ -47,12 +48,12 @@ object Wallservice {
     }
 
     fun createComment(comment: Comment) {
-        for (i in posts.indices){
+        for (i in posts.indices) {
             when {
                 posts[i].id == comment.postId -> comments += comment
-                }
             }
-        if(comments.isEmpty()) throw PostNotFoundException("Пост с id ${comment.postId} не существует!")
+        }
+        if (comments.isEmpty()) throw PostNotFoundException("Пост с id ${comment.postId} не существует!")
     }
 }
 
